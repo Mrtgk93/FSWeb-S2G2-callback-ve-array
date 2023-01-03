@@ -3,10 +3,14 @@ const { fifaData } = require('./fifa.js')
 
 /* Görev 1: 
 	Verilen datayı parçalayarak aşağıdaki verileri (console.log-ing) elde ederek pratik yapın. 
-	
+	np
 	💡 İPUCU: Öncelikle datayı filtrelemek isteyebilirsiniz */
 
 //(a) 2014 Dünya kupası Finali Evsahibi takım ismi (dizide "Home Team Name" anahtarı)
+const EvSahibi = fifaData.filter((homeTeamName) => {
+	return homeTeamName.Year ==2014 && homeTeamName.Stage =="Final" ;
+});
+//console.log(EvSahibi);
 
 //(b) 2014 Dünya kupası Finali Deplasman takım ismi  (dizide "Away Team Name" anahtarı)
 
@@ -25,10 +29,12 @@ const { fifaData } = require('./fifa.js')
 	💡 İPUCU - verilen data içindeki nesnelerin(objects) "Stage" anahtarına bakmalısınız
 */
 
-function Finaller(/* kodlar buraya */) {
-	
-    /* kodlar buraya */
-}
+function Finaller(dizi) {
+	 let finaller =  dizi.filter((x) => x.Stage == "Final" );
+	return finaller 
+	}
+ //console.log(Finaller(fifaData));
+
 
 
 
@@ -39,10 +45,13 @@ function Finaller(/* kodlar buraya */) {
 	3. Finaller data setindeki tüm yılları içeren "years" adındaki diziyi(array) döndürecek
 	*/
 
-function Yillar(/* kodlar buraya */) {
-	
-    /* kodlar buraya */
+function Yillar(dizi,Finaller) {
+	let x =  Finaller(dizi).map((y) => y.Year) ;
+	return x;
+
+   
 }
+//console.log(Yillar(fifaData,Finaller));
 
 
 /*  Görev 4: 
@@ -53,11 +62,19 @@ function Yillar(/* kodlar buraya */) {
 	💡 İPUCU: Beraberlikler(ties) için şimdilik endişelenmeyin (Detaylı bilgi için README dosyasına bakabilirsiniz.)
 	4. Tüm kazanan ülkelerin isimlerini içeren `kazananlar` adında bir dizi(array) döndürecek(return)  */ 
 
-function Kazananlar(/* kodlar buraya */) {
+function Kazananlar(dizi,Finaller) {
 	
-    /* kodlar buraya */
+   let Kazanan = Finaller(dizi).map((y) => {if ( y["Home Team Goals"] > y["Away Team Goals"]){
+	   return y["Home Team Name"];
+  	 } else 
+	   { 
+		return y["Away Team Name"] ;
+	   }
+		}
+	   );
+	return (Kazanan);
 	
-}
+} console.log(Kazananlar(fifaData,Finaller));
 
 
 
@@ -72,7 +89,7 @@ function Kazananlar(/* kodlar buraya */) {
 	💡 İPUCU: her cümlenin adım 4'te belirtilen cümleyle birebir aynı olması gerekmektedir.
 */
 
-function YillaraGoreKazananlar(/* kodlar buraya */) {
+function YillaraGoreKazananlar() {
 	
 /* kodlar buraya */
 
